@@ -1,0 +1,391 @@
+/* --------------------------------------------------------------
+ * EstateHub Mobile Application Stylesheet (compiled CSS)
+ * Generated manually from src/styles/main.scss
+ * -------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #ffffff;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.brand__logo {
+  font-size: 2rem;
+}
+
+.brand__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.brand__subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.primary-nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.nav-btn {
+  border: none;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nav-btn:hover,
+.nav-btn:focus-visible {
+  background: rgba(37, 99, 235, 0.2);
+  transform: translateY(-2px);
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem 2.5rem;
+}
+
+.hero {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(37, 99, 235, 0.18));
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+}
+
+.hero__content h2 {
+  margin: 0 0 0.75rem 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.hero__content p {
+  margin: 0;
+  color: #64748b;
+}
+
+.hero__cta {
+  display: flex;
+  align-items: center;
+}
+
+.panel {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel--detail {
+  position: relative;
+}
+
+.panel__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.panel__hint {
+  margin: 0;
+  color: #64748b;
+}
+
+.btn {
+  border: none;
+  border-radius: 16px;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn--primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background: #1f54c9;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.4);
+}
+
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.property-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.property-card:hover,
+.property-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+}
+
+.property-card__image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.property-card__body {
+  padding: 0 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.property-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.property-card__price {
+  margin: 0;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.property-card__address {
+  margin: 0;
+  color: #64748b;
+}
+
+.property-detail {
+  display: grid;
+  gap: 1rem;
+}
+
+.property-detail--empty {
+  display: block;
+}
+
+.property-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.5rem;
+}
+
+.property-gallery__image {
+  width: 100%;
+  border-radius: 16px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.property-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.property-meta__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.map-container {
+  width: 100%;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form__field input,
+.form__field textarea,
+.form__field select {
+  padding: 0.75rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  font: inherit;
+}
+
+.form__status {
+  min-height: 1.25rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.form__status.is-error {
+  color: #dc2626;
+}
+
+.form--auth .form__actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.account {
+  display: grid;
+  gap: 1rem;
+}
+
+.account__status {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: rgba(30, 41, 59, 0.05);
+  padding: 1rem;
+  border-radius: 16px;
+}
+
+.account__message {
+  margin: 0;
+}
+
+.account__message.is-error {
+  color: #dc2626;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #64748b;
+}
+
+.panel.is-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .app-header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .brand {
+    margin-bottom: 0;
+  }
+
+  .app-main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+
+  .panel {
+    padding: 2rem;
+  }
+
+  .panel__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .property-detail {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  .form__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .account {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EstateHub - Property Explorer</title>
+  <!-- Primary stylesheet compiled from SCSS source -->
+  <link rel="stylesheet" href="css/main.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Application shell for the mobile friendly real estate experience -->
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand__logo">🏠</span>
+        <div>
+          <h1 class="brand__title">EstateHub</h1>
+          <p class="brand__subtitle">Find the perfect place to call home</p>
+        </div>
+      </div>
+      <nav class="primary-nav" aria-label="Primary">
+        <button class="nav-btn" data-target="properties">Properties</button>
+        <button class="nav-btn" data-target="create-ad">Create Ad</button>
+        <button class="nav-btn" data-target="account">Account</button>
+      </nav>
+    </header>
+
+    <main class="app-main">
+      <!-- Hero section summarising the service offering -->
+      <section class="hero" id="hero">
+        <div class="hero__content">
+          <h2>Discover your next home with confidence</h2>
+          <p>Browse curated property listings, explore rich details and schedule a viewing in seconds.</p>
+        </div>
+        <div class="hero__cta">
+          <button id="browsePropertiesBtn" class="btn btn--primary">Browse Listings</button>
+        </div>
+      </section>
+
+      <!-- Property listing grid dynamically populated via TypeScript -->
+      <section class="panel" id="propertiesPanel">
+        <div class="panel__header">
+          <h3>Featured Properties</h3>
+          <p class="panel__hint">Tap a card to reveal full details, map directions, and book a viewing.</p>
+        </div>
+        <div id="propertyList" class="property-grid" aria-live="polite"></div>
+      </section>
+
+      <!-- Detailed property view for the selected ad -->
+      <section class="panel panel--detail" id="propertyDetailPanel" aria-live="polite">
+        <div class="panel__header">
+          <h3 id="detailTitle">Select a property to view details</h3>
+          <button id="closeDetailBtn" class="btn btn--ghost" aria-label="Close property details">Close</button>
+        </div>
+        <div id="detailContent" class="property-detail property-detail--empty">
+          <p>Please choose a property to view its full description, gallery, map and booking form.</p>
+        </div>
+      </section>
+
+      <!-- Reservation form connected to Firestore for storing viewings -->
+      <section class="panel" id="reservationPanel">
+        <div class="panel__header">
+          <h3>Book a Viewing</h3>
+          <p class="panel__hint">Complete the form below to request a viewing. Your booking is stored securely in Firestore.</p>
+        </div>
+        <form id="reservationForm" class="form" novalidate>
+          <div class="form__field">
+            <label for="reservationProperty">Property</label>
+            <select id="reservationProperty" required>
+              <option value="">Select a property</option>
+            </select>
+          </div>
+          <div class="form__field">
+            <label for="reservationDate">Preferred Date</label>
+            <input type="date" id="reservationDate" required />
+          </div>
+          <div class="form__field">
+            <label for="reservationTime">Preferred Time</label>
+            <input type="time" id="reservationTime" required />
+          </div>
+          <div class="form__field">
+            <label for="reservationNotes">Additional Notes</label>
+            <textarea id="reservationNotes" rows="3" placeholder="Let us know anything important"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary">Book Viewing</button>
+          <p id="reservationStatus" class="form__status" role="status"></p>
+        </form>
+      </section>
+
+      <!-- Ad creation area restricted to authenticated users -->
+      <section class="panel" id="createAdPanel">
+        <div class="panel__header">
+          <h3>Create a New Listing</h3>
+          <p class="panel__hint">Add a new property advertisement to Firestore once authenticated.</p>
+        </div>
+        <form id="createAdForm" class="form" novalidate>
+          <div class="form__grid">
+            <div class="form__field">
+              <label for="adTitle">Title</label>
+              <input type="text" id="adTitle" required />
+            </div>
+            <div class="form__field">
+              <label for="adPrice">Price (€)</label>
+              <input type="number" id="adPrice" required min="0" step="1000" />
+            </div>
+            <div class="form__field">
+              <label for="adAddress">Address</label>
+              <input type="text" id="adAddress" required />
+            </div>
+            <div class="form__field">
+              <label for="adLat">Latitude</label>
+              <input type="number" id="adLat" step="0.000001" required />
+            </div>
+            <div class="form__field">
+              <label for="adLng">Longitude</label>
+              <input type="number" id="adLng" step="0.000001" required />
+            </div>
+          </div>
+          <div class="form__field">
+            <label for="adDescription">Description</label>
+            <textarea id="adDescription" rows="4" required></textarea>
+          </div>
+          <div class="form__field">
+            <label for="adImages">Image URLs (comma separated)</label>
+            <input type="text" id="adImages" placeholder="https://example.com/photo1.jpg, https://example.com/photo2.jpg" />
+          </div>
+          <div class="form__field">
+            <label for="adFeatures">Key Features (comma separated)</label>
+            <input type="text" id="adFeatures" placeholder="Garden, Garage, Near schools" />
+          </div>
+          <button type="submit" class="btn btn--primary">Publish Listing</button>
+          <p id="createAdStatus" class="form__status" role="status"></p>
+        </form>
+      </section>
+
+      <!-- Account area for Firebase authentication -->
+      <section class="panel" id="accountPanel">
+        <div class="panel__header">
+          <h3>Your Account</h3>
+          <p class="panel__hint">Sign in to book viewings faster and create property advertisements.</p>
+        </div>
+        <div class="account">
+          <form id="authForm" class="form form--auth" novalidate>
+            <div class="form__field">
+              <label for="authEmail">Email</label>
+              <input type="email" id="authEmail" required />
+            </div>
+            <div class="form__field">
+              <label for="authPassword">Password</label>
+              <input type="password" id="authPassword" required minlength="6" />
+            </div>
+            <div class="form__actions">
+              <button type="submit" id="loginBtn" class="btn btn--primary">Log In</button>
+              <button type="button" id="registerBtn" class="btn btn--ghost">Register</button>
+            </div>
+          </form>
+          <div class="account__status" id="accountStatus" role="status">
+            <p class="account__message">You are browsing as a guest.</p>
+            <button type="button" id="logoutBtn" class="btn btn--ghost">Log Out</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; <span id="currentYear"></span> EstateHub. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- jQuery and application bundle -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-o88Awf4w9I5ttI0VkGF+OA6G0Q5PaW5R0i0D9W0K0jk=" crossorigin="anonymous"></script>
+
+  <!-- Firebase SDKs (configurable via window.ESTATE_HUB.firebaseConfig) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <!-- Google Maps API (inject your API key via the key query parameter) -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+
+  <!-- Application script generated from TypeScript source -->
+  <script src="js/app.js"></script>
+</body>
+</html>
