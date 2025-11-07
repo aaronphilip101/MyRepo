@@ -1,0 +1,427 @@
+// --------------------------------------------------------------
+// EstateHub Mobile Application Stylesheet (SCSS Source)
+// This file defines the design system, layout utilities and
+// responsive behaviours for the property browsing experience.
+// --------------------------------------------------------------
+
+// Colour palette and spacing scale
+$colour-primary: #2563eb;
+$colour-secondary: #1e293b;
+$colour-surface: #ffffff;
+$colour-background: #f8fafc;
+$colour-border: #e2e8f0;
+$colour-text: #0f172a;
+$colour-muted: #64748b;
+
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
+$spacing-10: 2.5rem;
+
+$radius-base: 16px;
+$shadow-elevated: 0 16px 32px rgba(15, 23, 42, 0.08);
+
+// Media query helper for tablet breakpoints
+@mixin respond-tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+// Root defaults
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: $colour-background;
+  color: $colour-text;
+  line-height: 1.5;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: $colour-surface;
+  padding: $spacing-4 $spacing-6;
+  border-bottom: 1px solid $colour-border;
+  box-shadow: $shadow-elevated;
+
+  @include respond-tablet {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  margin-bottom: $spacing-4;
+
+  @include respond-tablet {
+    margin-bottom: 0;
+  }
+}
+
+.brand__logo {
+  font-size: 2rem;
+}
+
+.brand__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.brand__subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $colour-muted;
+}
+
+.primary-nav {
+  display: flex;
+  gap: $spacing-3;
+}
+
+.nav-btn {
+  border: none;
+  background: rgba($colour-primary, 0.1);
+  color: $colour-primary;
+  padding: $spacing-3 $spacing-4;
+  border-radius: $radius-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba($colour-primary, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-6;
+  padding: $spacing-6 $spacing-4 $spacing-10;
+
+  @include respond-tablet {
+    padding: $spacing-8;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.hero {
+  background: linear-gradient(135deg, rgba($colour-primary, 0.08), rgba($colour-primary, 0.18));
+  padding: $spacing-6;
+  border-radius: $radius-base;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  box-shadow: $shadow-elevated;
+
+  @include respond-tablet {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.hero__content h2 {
+  margin: 0 0 $spacing-3 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.hero__content p {
+  margin: 0;
+  color: $colour-muted;
+}
+
+.hero__cta {
+  display: flex;
+  align-items: center;
+}
+
+.panel {
+  background: $colour-surface;
+  border-radius: $radius-base;
+  padding: $spacing-6;
+  box-shadow: $shadow-elevated;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.panel--detail {
+  position: relative;
+}
+
+.panel__header {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+
+  @include respond-tablet {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.panel__hint {
+  margin: 0;
+  color: $colour-muted;
+}
+
+.btn {
+  border: none;
+  border-radius: $radius-base;
+  padding: $spacing-3 $spacing-4;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn--primary {
+  background: $colour-primary;
+  color: $colour-surface;
+
+  &:hover,
+  &:focus-visible {
+    background: darken($colour-primary, 5%);
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: $colour-primary;
+  border: 1px solid rgba($colour-primary, 0.4);
+
+  &:hover,
+  &:focus-visible {
+    background: rgba($colour-primary, 0.12);
+  }
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: $spacing-4;
+}
+
+.property-card {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  border: 1px solid $colour-border;
+  border-radius: $radius-base;
+  overflow: hidden;
+  background: $colour-surface;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: $shadow-elevated;
+  }
+}
+
+.property-card__image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.property-card__body {
+  padding: 0 $spacing-4 $spacing-4;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.property-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.property-card__price {
+  margin: 0;
+  font-weight: 700;
+  color: $colour-primary;
+}
+
+.property-card__address {
+  margin: 0;
+  color: $colour-muted;
+}
+
+.property-detail {
+  display: grid;
+  gap: $spacing-4;
+
+  @include respond-tablet {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.property-detail--empty {
+  display: block;
+}
+
+.property-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: $spacing-2;
+}
+
+.property-gallery__image {
+  width: 100%;
+  border-radius: $radius-base;
+  height: 120px;
+  object-fit: cover;
+}
+
+.property-meta {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+}
+
+.property-meta__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
+}
+
+.tag {
+  background: rgba($colour-primary, 0.12);
+  color: $colour-primary;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.map-container {
+  width: 100%;
+  height: 280px;
+  border-radius: $radius-base;
+  overflow: hidden;
+  border: 1px solid $colour-border;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.form__grid {
+  display: grid;
+  gap: $spacing-4;
+
+  @include respond-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.form__field input,
+.form__field textarea,
+.form__field select {
+  padding: $spacing-3;
+  border-radius: $radius-base;
+  border: 1px solid $colour-border;
+  font: inherit;
+}
+
+.form__status {
+  min-height: 1.25rem;
+  font-size: 0.875rem;
+  color: $colour-muted;
+}
+
+.form__status.is-error {
+  color: #dc2626;
+}
+
+.form--auth .form__actions {
+  display: flex;
+  gap: $spacing-3;
+}
+
+.account {
+  display: grid;
+  gap: $spacing-4;
+
+  @include respond-tablet {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+}
+
+.account__status {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  background: rgba($colour-secondary, 0.05);
+  padding: $spacing-4;
+  border-radius: $radius-base;
+}
+
+.account__message {
+  margin: 0;
+}
+
+.account__message.is-error {
+  color: #dc2626;
+}
+
+.app-footer {
+  text-align: center;
+  padding: $spacing-6;
+  color: $colour-muted;
+}
+
+.panel.is-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// Tablet specific adjustments for spacing and layout
+@include respond-tablet {
+  .app-main {
+    gap: $spacing-8;
+  }
+
+  .hero {
+    padding: $spacing-8;
+  }
+
+  .panel {
+    padding: $spacing-8;
+  }
+}
